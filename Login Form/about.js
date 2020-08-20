@@ -53,6 +53,8 @@ function showCart(fromUndo) {
 
 $(".close-modal").click(function () {
 
+    $("#PasswordModal").css("display", "none");
+    $("#ItemModal").css("display", "none");
     $("#Modal").css("display", "none");
 });
 

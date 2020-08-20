@@ -1,0 +1,43 @@
+﻿body{
+
+    background-color: teal;
+}
+
+#message1, #message2 {
+    font-size: 48px;
+    background-color: yellow;
+    color: blue;
+}
+
+#form {
+    text-align: center;
+    margin-top: 6.5%;
+    background-color: aqua;
+}
+
+#form button {
+    padding-left: 17%;
+    padding-right: 17%;
+}
+
+#form input {
+    width: 38%;
+    height: 12%;
+}
+
+#form img {
+    transform: scale(.5);
+}
+
+#form a {
+    margin-top: 2%;
+    padding-bottom: 2%;
+    text-decoration: none
+}
+
+#form h1{
+
+    margin-left: 25%;
+    width: 50%;
+    border:groove;
+}

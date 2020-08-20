@@ -1,0 +1,187 @@
+﻿body {
+    background-image: url("images/background.jpg");
+    background-size: cover;
+    overflow-y: scroll;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+}
+
+#Modal {
+    min-width: 470px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close-modal {
+    color: #aaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close-modal:hover,
+    .close-modal:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+#NavBar {
+    background-color: rgba(0, 255, 255, 0.75);
+   /* min-width: 470px;*/
+}
+
+    #NavBar li:hover {
+        background-color: white;
+        color: blue;
+    }
+
+        #NavBar li:hover a {
+            color: blue;
+        }
+
+            #NavBar li:hover a img {
+                transform: scale(1.2);
+            }
+
+    #NavBar a img:hover {
+        transform: scale(1.2);
+    }
+
+#Banner {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+#Messages {
+    color: white;
+    border: dashed;
+    font-size: 190%;
+}
+
+hr {
+    border: 1px solid #000000;
+}
+
+div.rowDiv div.indivDiv {
+    margin-right: 3%;
+    margin-bottom: 3%;
+}
+
+div.indivDiv:hover {
+    transform: scale(1.1);
+}
+
+#Footer {
+    display: inline-flex;
+    width: 100%;
+    min-width: 470px;
+}
+
+    #Footer div:not(:last-child) {
+        text-align: center;
+    }
+
+    #Footer div:last-child{
+        text-align: left;
+        padding-left: 18%;
+    }
+
+    #ImageDiv {
+        width: auto;
+        background-color: rgba(0, 255, 255, 0.5);
+        text-align: center;
+    }
+
+#Footer #ImageDiv #Image {
+    width: 70%;
+    height: 15em;
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+#Footer #Address {
+    background-color: rgba(0, 255, 255, 0.5);
+}
+
+#Footer #Contact-Info {
+    background-color: rgba(0, 255, 255, 0.5);
+    width: 100%;
+}
+
+    #Footer #Contact-Info span {
+        font-size: 2em;
+    }
+
+    #Footer #Contact-Info a {
+        font-size: 2em;
+    }
+
+.verticle-line {
+    border-left: 3px solid black;
+    height: auto;
+}
+
+.rowDiv .indivDiv {
+    min-width: 33.333%;
+}
+
+/*@media screen and (max-width: 1459px) {
+    .rowDiv {
+        display: inline !important;
+        width: 100%;
+    }
+
+    .indivDiv {
+        width: auto !important;
+        margin-left: 3%;
+        padding-bottom: 4% !important;
+    }
+
+    .rowDiv .indivDiv:not(:last-child) {
+        margin-bottom: 3%;
+    }
+
+    .rowDiv .indivDiv{
+        margin-right: 0%;
+    }
+
+    #Messages {
+        padding-right: 26%;
+        padding-left: 26%;
+    }
+
+}
+
+@media screen and (max-width: 470px){
+
+    .indivDiv {
+        padding-bottom: 4% !important;
+    }
+
+    #Messages {
+        padding-right: 0%;
+        padding-left: 0%;
+    }
+}*/

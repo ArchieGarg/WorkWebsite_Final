@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="images/icon.png" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <title>Signup To Start Shopping</title>
+</head>
+<body>
+    
+    <form id="form" class="container mr-auto ml-auto">
+        <h1>Sign Up To Shop at Archie's Store</h1>
+        <img src="images/profile-pic.jpg" class="img-fluid"/>
+        <br />
+        <span id="messages"></span>
+        <br />
+        <p>Username:</p>
+        <input id ="user" type="text" placeholder="username" required/>
+        <br />
+        <p>Password:</p>
+        <input id ="pass" type="password" placeholder="password" required/>
+        <br />
+        <p>Confirm Password:</p>
+        <input id ="confirmPass" type="password" placeholder="confirm password" required/>
+        <br />
+        <input type="submit" />
+        <br />
+        <a href="index.html">Go Back and Log In.</a>
+    </form>
+    <script>
+
+        $("#messages").css("font-size", "30px");
+        $("#form").submit(function (event) {
+            event.preventDefault();
+            var user = $("#user").val();
+            var pass = $("#pass").val();
+            var confirmPass = $("#confirmPass").val();
+
+            if (pass !== confirmPass) {
+
+                $("#messages").text("Passwords Don't Match!");
+                $("#messages").css("background-color", "yellow");
+                setTimeout(function () {
+
+                    $("#messages").text("");
+                    $("#messages").css("Display","hidden");
+                }, 1500);
+                return;
+            }
+
+            $.ajax({
+
+                url: "/api/TempSignUp/AddToList_" + user + "&" + pass,
+                type: "POST",
+                success: function (data) {
+
+                    $("#messages").css("Display", "visible");
+                    $("#messages").text("Success Acount is Created");
+                    $("#messages").css("background-color", "blue");
+                    setTimeout(function () {
+                        window.location.replace("\index.html");
+                    }, 1000);
+                },
+                error: function (data) {
+                    alert("api error");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

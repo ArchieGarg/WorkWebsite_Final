@@ -1,0 +1,59 @@
+﻿body {
+
+    background-color: teal;
+}
+
+#messages{
+    background-color: yellow;
+    font-size: 48px;
+}
+
+#table thead tr{
+
+    padding-bottom: 15%;
+}
+
+#table td {
+    padding: 0 15px;
+}
+
+hr {
+    border: 1px solid #000000;
+    margin-right: 75%;
+}
+
+#logout{
+
+    margin-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: green;
+    color: blue;
+    border-radius: 100px 100px;
+    vertical-align:super;
+}
+
+form #submit {
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: teal;
+    color: black;
+    border-radius: 100px 100px;
+}
+
+#form input:not(:last-of-type) {
+    border: none;
+    border-radius: 10px 5px;
+}
+
+#currentUser {
+    color: purple;
+    border: dashed;
+    border: dashed;
+    padding-right: 78%;
+    font-size: 190%;
+}

@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="temp.css" />
+    <link rel="icon" href="images/2c6db45dcf47c90ff4456d5bbe01a269.jpg" />
+    <meta charset="utf-8" />
+    <title>About | Archie Garg</title>
+</head>
+<body onload="onload();">
+
+    <div id="Modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <a href="#" onclick="undo();">Undo Deletion</a>
+            <br />
+            <h5 id="ModalMessage" style="color:blue;background-color:wheat; display: inline-block;"></h5>
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Indiv. Price
+                        </th>
+                        <th>
+                            Total Price
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="ItemModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content container-fluid">
+            <span class="close-modal">&times;</span>
+            <br />
+            <h5 id="ItemNameModal" style="color:teal; display: inline-block;"></h5>
+            <div class="row">
+
+                <div class="col-sm">
+                    <h3 id="ItemTextModal"></h3>
+                </div>
+                <div class="col-sm">
+                    <div class="row">
+                        <div class="col-sm">
+                            <img id="ItemModalImage" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="PasswordModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <span id="PasswordModelMessages" style="color:teal; background-color:antiquewhite; width:100%"></span>
+            <h5 id="Name" style="color:teal; display: inline-block; width:100%;"></h5>
+            <h5 style="color:teal; display: inline-block; width: 100%;">Change A Password</h5>
+            <form id="ChangePasswordForm">
+                <input id="OldPassword" type="password" placeholder="CurrentPassword" style="width:100%;" required />
+                <br />
+                <input id="Password" type="password" placeholder="Password" style="width:100%;" required />
+                <br />
+                <input id="ConfirmPassword" type="password" placeholder="Confirm Password" style="width:100%;" required />
+                <br />
+                <input type="submit" style="width: 100%;" />
+            </form>
+        </div>
+    </div>
+    <div id="Banner">
+        <span id="AboutMessages"></span>
+    </div>
+    <img src="images/banner.jpg" width="100%" height="500" />
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="NavBar">
+        <a class="navbar-brand" href="/temp.html">
+            <img src="images/illuminati.png" width="50" class="d-inline-block align-middle mr-2" />
+            <span>Archie's Store</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/temp.html">
+                        <img src="images/icon.png" width="30" />
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about.html">
+                        <img src="images/about.png" width="30" />
+                        About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact.html">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showCart(false);">
+                        <img src="images/shopping.png" width="30" />
+                        Cart
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <button class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        Account Settings
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item" onclick="ShowPasswordChangeModel();">Update Password</a>
+                        <a href="#" class="dropdown-item" onclick="ConfirmAccountDeletion();">Delete Account</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="logout();">
+                        <img src="images/logoutIcon.png" width="25" />
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <script src="/about.js"></script>
+    <script>
+
+        function onload() {
+
+            var user = sessionStorage.getItem("username");
+            if (user == null)
+                window.location.replace("/index.html");
+            $.get("/api/TempLogin/CanAccess/" + user, function (data) {
+            }).done(function (data) {
+                if (data === false) {
+                    window.location.replace("/index.html");
+                    return;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

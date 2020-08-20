@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="icon" href="images/icon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8" />
+    <title>Login Form </title>
+</head>
+<body onload="initialize(); canProcede();">
+
+    <form id="form" class="container ml-auto mr-auto">
+        <h1>Login to Shop at Archie's Store</h1>
+        <img src="images/profile-pic.jpg" class="img-fluid" />
+        <br />
+        <span id="message1"></span>
+        <br />
+        <span id="message2"></span>
+        <br />
+        <p>Username:</p>
+        <input id="username" type="text" name="username" required placeholder="username" />
+        <br />
+        <p>Password:</p>
+        <input id="password" type="password" name="password" required placeholder="password" />
+        <br />
+        <button type="submit">Login</button>
+        <br />
+        <a href="/signup.html">Don't Have an Account Sign Up for One Today</a>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
+    <script>
+
+        function canProcede() {
+
+            $.ajax({
+
+                url: "/api/NewLogin/CanAccess/" + sessionStorage.getItem("usernamet1"),
+                type: "GET",
+                success: function (data) {
+                    if (data === true)
+                        window.location = "/temp.html";
+                }
+            });
+
+            $.ajax({
+
+                url: "/api/Login/CanAccess/" + sessionStorage.getItem("usernamet2"),
+                type: "GET",
+                success: function (data) {
+                    if (data === true)
+                        window.location = "/home.html";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

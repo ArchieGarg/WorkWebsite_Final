@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="icon" href="images/shopping.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="temp.css" />
+    <meta charset="utf-8" />
+    <title>Welcome | Archie's Store</title>
+</head>
+<body onload="onload();">
+
+    <div id="Modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <a href="#" onclick="undo();">Undo Deletion</a>
+            <br />
+            <h5 id="ModalMessage" style="color:blue;background-color:wheat; display: inline-block;"></h5>
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Indiv. Price
+                        </th>
+                        <th>
+                            Total Price
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="Banner">
+        <span id="Messages"></span>
+    </div>
+    <img src="images/banner.jpg" width="100%" height="500" />
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="NavBar">
+        <a class="navbar-brand" href="#">
+            <img src="images/illuminati.png" width="50" class="d-inline-block align-middle mr-2" />
+            <span>Archie's Store</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <img src="images/icon.png" width="30" />
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about.html">
+                        <img src="images/about.png" width="30" />
+                        About
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showCart(false);">
+                        <img src="images/shopping.png" width="30" />
+                        Cart
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="logout();">
+                        <img src="images/logoutIcon.png" width="25" />
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <hr />
+    <div id="Store" class="container-fluid">
+    </div>
+    <hr />
+    <div id="Footer">
+
+        <div id="ImageDiv">
+            <img id="Image" src="images/2c6db45dcf47c90ff4456d5bbe01a269.jpg" />
+        </div>
+        <div class="verticle-line"></div>
+        <div id="Address">
+
+            <h1>Address:</h1>
+            <address style="font-size: 32px; text-align: center;">3 Research Pl. Rockville MD, 20878</address>
+        </div>
+        <div class="verticle-line"></div>
+        <div id="Contact-Info">
+            <h1>
+                Contact Info:
+            </h1>
+            <span>
+                Name: Archie Garg
+            </span>
+            <br />
+            <span>
+                Phone Number:
+            </span>
+            <a href="tel:3015257539">
+                +1 301-525-7539
+            </a>
+            <br />
+            <span>
+                Email:
+            </span>
+            <a href="mailto:garg.archie@gmail.com">
+                garg.archie@gmail.com
+            </a>
+        </div>
+    </div>
+    <script src="temp.js"></script>
+</body>
+</html>

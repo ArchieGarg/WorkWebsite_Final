@@ -19,9 +19,12 @@ body::-webkit-scrollbar {
     background-color: rgba(0,0,0,0.4);
 }
 
-#PasswordModal .modal-content{
-    width: 16%;
-    height: auto;
+#AboutContent {
+    padding: 3% 3% 3% 3%;
+    background-color: rgba(255,255,255,0.5);
+    width: 94%;
+    margin-left: 3%;
+    margin-top: 3%;
 }
 
 #Modal {
@@ -140,10 +143,6 @@ div.indivDiv:hover {
 .verticle-line {
     border-left: 3px solid black;
     height: auto;
-}
-
-.rowDiv .indivDiv {
-    min-width: auto;
 }
 
 .rowDiv .indivDiv img:hover, .modal .modal-content #ItemModalImage:hover{

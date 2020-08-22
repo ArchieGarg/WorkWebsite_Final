@@ -145,10 +145,6 @@ div.indivDiv:hover {
     height: auto;
 }
 
-.rowDiv .indivDiv {
-    min-width: auto;
-}
-
 .rowDiv .indivDiv img:hover, .modal .modal-content #ItemModalImage:hover{
     transform: scale(1.01);
 }

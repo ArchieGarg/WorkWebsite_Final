@@ -1,6 +1,16 @@
 ﻿$("#AboutMessages").text("Hello, " + sessionStorage.getItem("usernamet1") + "!");
 $("#ContactMessages").text("Hello, " + sessionStorage.getItem("usernamet1") + "!");
 
+var tenant = sessionStorage.getItem("tenant");
+if (tenant === "both") {
+    $("<li id=\"ToOldUILi\" class=\"nav-item\">").appendTo("#LeftNav");
+    $("<a id=\"ToOldUIA\" class=\"nav-link\" href=\"/home.html\">").appendTo("#ToOldUILi");
+    $("<img id=\"ToOldUIImg\" width=\"30\">").appendTo("#ToOldUIA");
+    $("#ToOldUIImg").attr("src", "/images/Arrow Icon.png");
+    $("<span id=\"ToOldUISpan\">").appendTo("#ToOldUIA");
+    $("#ToOldUISpan").text("Tenant1");
+}
+
 var url = "/api/NewHome";
 function showCart(fromUndo) {
 
@@ -66,7 +76,7 @@ $(".modal").click(function () {
 
 function logout() {
 
-    var jqxhr = $.get("/api/NewLogin/LogOut/" + sessionStorage.getItem("username"), function () {
+    var jqxhr = $.get("/api/NewLogin/LogOut/" + sessionStorage.getItem("usernamet1"), function () {
     }).done(function (data) {
 
         $("#AboutMessages").text(jqxhr.getResponseHeader("message"));
@@ -127,7 +137,7 @@ function ConfirmAccountDeletion() {
     if (retVal == true) {
         alert("Your Account Has Been Successfully Deleted! Your Cart Will Be Emptied and You Will Be Logged Out!");
         emptyCart();
-        this.logout();
+        logout();
         $.ajax({
             url: "/api/NewParent/PostRemoveUser/" + sessionStorage.getItem("username") + "&" + "P4s9LnYKCquF4CVU",
             type: "POST",

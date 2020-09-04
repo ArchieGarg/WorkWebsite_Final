@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div id="PasswordModal" class="modal">
+    <div id="PasswordModal" class="modal container-fluid">
 
         <!-- Modal content -->
         <div class="modal-content">
@@ -100,7 +100,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav mr-auto">
+            <ul id="LeftNav" class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/temp.html">
                         <img src="images/icon.png" width="30" />
@@ -148,15 +148,62 @@
             </ul>
         </div>
     </nav>
+    <div id="AboutContent" class="text-dark">
+        
+        <h1 style="text-indent: 5%; font-family: Consolas">
+            Archie is a sharp, creative, lighthearted, fun individual who likes to work hard, smart and all with a geeky
+            personality. He puts in efforts and thought to give back to his community while
+            pushing himself academically and all while participating in extracurricular
+            activities at school. He pursues his passions (technology & community
+            give-back) extensively by going above and beyond the call of duty, an example
+            of the same is, completing two computer science pathways instead of one. He
+            does this through a signature program called AOIT (Academy of Information
+            Technology) that teaches students practical computer science/IT skills. He
+            pursues his passion in any available personal time by learning programming
+            languages (e.g. Python), Azure, and mobile app development to expand his scope
+            of knowledge. Additionally, Archie was so good in programming skills that he
+            got recommended by his teacher to a higher-level class. His extracurricular
+            activities are aligned to his passion for technology too. To that end he helped
+            establish a TSA (Technology Student Association) club and is an active member
+            & parliamentarian of this club. He won in the top 3 at the state level in TSA
+            competitions such as robotics, geo-spatial technology, and videogame
+            development. He was also a national level participant in Cybersecurity. More
+            importantly he is always eager to learn, he goes to his programming teacher frequently
+            during lunch to work on projects and to ask additional clarification questions
+            to satisfy his curiosity. More impressively, he also has an industry
+            certification, CompTIA A+ (1001, 1002), which proves his ability to be
+            successful in the industry and gives him an edge over his peers. Furthermore, he
+            gives back to his community whether at school or across the nation. For
+            example, he gave back over four times the required community service hours. He
+            has volunteered at the Board of Elections and received an ‘Global Citizenship’ award
+            of recognition because of his efforts & contributions to assist the voters
+            and election commission staff for the successful conclusion of the early voting
+            during the primaries. At such an early age, he has secured an internship which
+            shows his proactiveness in learning and using his skills. This isn’t just any
+            internship but supports his ethos of community give back. He empowers the labor
+            unions nation-wide by assisting in the development of a cloud-based union
+            membership management platform for them. Lastly, he has held many leadership positions
+            in his school including Patriot Ambassador and being a club officer in TSA and
+            has made numerous positive contributions to his school; for example, he was a
+            graduation speaker for AOIT’s graduation and volunteered over the summer to
+            help run the main-office. Last but not least he is in the Student Ambassadors and SGA,
+            this shows his eagerness to lead, to make a difference wherever he can, and to
+            be a positive influence on others. He is also the President Elect of the TSA
+            club. This is an example of being a leader not a follower in order to make
+            positive contributions and differences in his close community by being a role
+            model to others. He is a good team player & a leader who likes to
+            get everyone involved.
+        </h1>
+    </div>
     <script src="/about.js"></script>
     <script>
 
         function onload() {
 
-            var user = sessionStorage.getItem("username");
+            var user = sessionStorage.getItem("usernamet1");
             if (user == null)
                 window.location.replace("/index.html");
-            $.get("/api/TempLogin/CanAccess/" + user, function (data) {
+            $.get("/api/NewLogin/CanAccess/" + user, function (data) {
             }).done(function (data) {
                 if (data === false) {
                     window.location.replace("/index.html");

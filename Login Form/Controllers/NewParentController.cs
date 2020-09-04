@@ -15,6 +15,7 @@ namespace Login_Form.Controllers
     {
         private static bool once = true;
         private static Object lockObject = new Object();
+        private static List<NewUser> users = new List<NewUser>();
 
         public NewParentController()
         {
@@ -38,7 +39,7 @@ namespace Login_Form.Controllers
                             NewUser tempUser = new NewUser();
                             tempUser.SetUser((string)reader["Username"]);
                             tempUser.SetPass((string)reader["Password"]);
-                            GetUsers().Add(tempUser);
+                            users.Add(tempUser);
                         }
                     }
                 }
@@ -53,19 +54,21 @@ namespace Login_Form.Controllers
 
         public static bool AddUser(String user, String pass, String auth)
         {
+            if (!String.Equals(auth, "SignUpToken"))
+                return false;
             lock (lockObject)
             {
                 NewUser tempUser = new NewUser();
                 tempUser.SetUser(user);
                 tempUser.SetPass(pass);
-                GetUsers().Add(tempUser);
+                users.Add(tempUser);
             }
             return SuperParentController.AddUser(user, pass, "Tenant1", auth);
         }
 
         public static NewUser GetUser(String u)
         {
-            foreach (NewUser currentUser in GetUsers())
+            foreach (NewUser currentUser in users)
             {
                 if (String.Equals(u, currentUser.GetFriendlyName()))
                 {
@@ -85,7 +88,7 @@ namespace Login_Form.Controllers
             Debug.WriteLine("here");
             Debug.WriteLine(NewLoginController.uniqueID + " user: " +  user);
             lock (lockObject) { 
-                GetUsers().Remove(GetUser(user)); 
+                users.Remove(GetUser(user)); 
             }
             Char[] digits = new Char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             user = user.TrimEnd(digits);
@@ -126,8 +129,9 @@ namespace Login_Form.Controllers
         public List<NewStoreItem> GetUserCart(String user)
         {
             
-            foreach(NewUser currentUser in GetUsers())
+            foreach(NewUser currentUser in users)
             {
+                Debug.WriteLine("in NewParent, GetUserCart() with friendly name: " + currentUser.GetFriendlyName());
                 if (String.Equals(user, currentUser.GetFriendlyName()))
                 {
                     return currentUser.GetCart();
@@ -139,7 +143,7 @@ namespace Login_Form.Controllers
         public Stack<NewStoreItem> GetUserStack(String u)
         {
 
-            foreach (NewUser user in GetUsers())
+            foreach (NewUser user in users)
             {
                 if (String.Equals(user.GetFriendlyName(), u))
                     return user.GetStack();
@@ -152,7 +156,7 @@ namespace Login_Form.Controllers
 
             lock (lockObject)
             {
-                foreach (NewUser currentUser in GetUsers())
+                foreach (NewUser currentUser in users)
                 {
 
                     if (String.Equals(currentUser.getUser().TrimEnd(), userName))
@@ -164,6 +168,10 @@ namespace Login_Form.Controllers
                 }
                 return false;
             }
+        }
+        public static List<NewUser> GetUsers()
+        {
+            return users;
         }
     }
 }

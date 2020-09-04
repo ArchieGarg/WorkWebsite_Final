@@ -222,13 +222,24 @@ function ConfirmAccountDeletion() {
     if (retVal == true) {
         //api call
         alert("Your Account Has Been Successfully Deleted! Your Cart Will Be Emptied and You Will Be Logged Out!");
-        emptyCart();
-        logout();
+        emptyCartT1();
+        logoutT1();
         $.ajax({
             url: "/api/NewParent/PostRemoveUser/" + sessionStorage.getItem("usernamet1") + "&" + "P4s9LnYKCquF4CVU",
             type: "POST",
             error: function (data) {
                 alert("error");
+            },
+            success: function (data, status, xhr) {
+                emptyCartT2();
+                logoutT2();
+                $.ajax({
+                    url: "/api/Parent/PostRemoveUser/" + sessionStorage.getItem("usernamet1") + "&" + "P4s9LnYKCquF4CVU",
+                    type: "POST",
+                    error: function (data) {
+                        alert("error");
+                    }
+                });
             }
         });
     }
@@ -237,7 +248,7 @@ function ConfirmAccountDeletion() {
     }
 }
 
-function emptyCart() {
+function emptyCartT1() {
     $.ajax({
         url: url + "/PostEmptyCart/" + sessionStorage.getItem("usernamet1"),
         method: "POST",
@@ -344,9 +355,24 @@ $(".close-modal").click(function () {
     $("#ItemModal").css("display", "none");
 });
 
-function logout() {
+function logoutT1() {
 
     var jqxhr = $.get("/api/NewLogin/LogOut/" + sessionStorage.getItem("usernamet1"), function () {
+    }).done(function (data) {
+
+        $("#Messages").text(jqxhr.getResponseHeader("message"));
+        $("#Messages").css("background-color", "pink");
+        $("#Messages").css("font-size", "120%");
+        setTimeout(function () {
+            window.location = jqxhr.getResponseHeader("location");
+        }, 1000);
+        return;
+    });
+}
+
+function logoutT2() {
+
+    var jqxhr = $.get("/api/Login/LogOut/" + sessionStorage.getItem("usernamet2"), function () {
     }).done(function (data) {
 
         $("#Messages").text(jqxhr.getResponseHeader("message"));

@@ -74,7 +74,7 @@ $(".modal").click(function () {
     }
 });
 
-function logout() {
+function logoutT1() {
 
     var jqxhr = $.get("/api/NewLogin/LogOut/" + sessionStorage.getItem("usernamet1"), function () {
     }).done(function (data) {
@@ -136,8 +136,8 @@ function ConfirmAccountDeletion() {
     var retVal = confirm("Are You Sure You Want To Delete Your Account? I will hate to see you leave.");
     if (retVal == true) {
         alert("Your Account Has Been Successfully Deleted! Your Cart Will Be Emptied and You Will Be Logged Out!");
-        emptyCart();
-        logout();
+        emptyCartT1();
+        logoutT1();
         $.ajax({
             url: "/api/NewParent/PostRemoveUser/" + sessionStorage.getItem("username") + "&" + "P4s9LnYKCquF4CVU",
             type: "POST",
@@ -151,7 +151,7 @@ function ConfirmAccountDeletion() {
     }
 }
 
-function emptyCart() {
+function emptyCartT1() {
     $.ajax({
         url: url + "/PostEmptyCart/" + sessionStorage.getItem("username"),
         method: "POST",

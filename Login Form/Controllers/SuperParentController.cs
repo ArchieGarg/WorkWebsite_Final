@@ -12,7 +12,6 @@ namespace Login_Form.Controllers
 {
     public class SuperParentController : ApiController
     {
-        private static List<NewUser> users = new List<NewUser>();
 
         public static bool AddUser(String user, String pass, String tenant, String auth)
         {
@@ -46,11 +45,6 @@ namespace Login_Form.Controllers
                 command.ExecuteNonQuery();
             }
             return true;
-        }
-
-        public static List<NewUser> GetUsers()
-        {
-            return users;
         }
     }
 }

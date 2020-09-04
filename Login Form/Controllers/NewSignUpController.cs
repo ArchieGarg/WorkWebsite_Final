@@ -15,6 +15,7 @@ namespace Login_Form.Controllers
 
             if (AddUser(user, pass, "SignUpToken") == false)
                 throw new Exception("could not authenticate");
+            System.Diagnostics.Debug.WriteLine("Sign user: " + user + " in new signup c()");
             return true;
         }
     }

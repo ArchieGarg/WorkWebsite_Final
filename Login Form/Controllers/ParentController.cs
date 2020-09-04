@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Diagnostics;
 using System.Data.SqlClient;
+using Login_Form.Models;
 
 namespace Login_Form.Controllers
 {
@@ -13,6 +14,7 @@ namespace Login_Form.Controllers
     {
         private static bool once = true;
         private static List<Models.User> users = new List<Models.User>();
+        private static Object lockObject = new Object();
 
         public ParentController()
         {
@@ -59,10 +61,13 @@ namespace Login_Form.Controllers
 
             if (!String.Equals(auth, "SignUpToken"))
                 return false;
-            Models.User newUser = new Models.User();
-            newUser.SetUser(user);
-            newUser.SetPass(pass);
-            users.Add(newUser);
+            lock (lockObject)
+            {
+                Models.User newUser = new Models.User();
+                newUser.SetUser(user);
+                newUser.SetPass(pass);
+                users.Add(newUser);
+            }
             SuperParentController.AddUser(user, pass,"Tenant2", auth);
             return true;
         }
@@ -82,5 +87,43 @@ namespace Login_Form.Controllers
             }
             return false;
         }
+
+        [HttpPost]
+        public void PostRemoveUser(String user, String auth)
+        {
+            Debug.WriteLine("Removing User: " + user);
+            if (!auth.Equals("P4s9LnYKCquF4CVU"))
+                return;
+
+            Debug.WriteLine("here");
+            Debug.WriteLine(NewLoginController.uniqueID + " user: " + user);
+            lock (lockObject)
+            {
+                users.Remove(GetUser(user));
+            }
+            Char[] digits = new Char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            user = user.TrimEnd(digits);
+            using (SqlConnection connection = new SqlConnection("Server=uniontrackinternsql.database.windows.net;Database=ArchieSQL;User Id=uniontrack;Password=Kinsella9011;"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(null, connection);
+                // Create and prepare an SQL statement.
+                command.CommandText =
+                    "DELETE from Login_Details where Username='" + user + "'";
+                Debug.WriteLine(command.ExecuteNonQuery());
+            }
+        }
+        public static User GetUser(String u)
+        {
+            foreach (User currentUser in users)
+            {
+                if (String.Equals(u, currentUser.GetFriendlyName()))
+                {
+                    return currentUser;
+                }
+            }
+            return null;
+        }
+
     }
 }

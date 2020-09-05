@@ -1,5 +1,5 @@
 ﻿
-const url = "/api/Temp";
+const url = "/api/NewHome";
 var ItemDescrip = [];
 var Fact1 = [];
 var Fact2 = [];
@@ -7,10 +7,10 @@ var Fact3 = [];
 
 function onload() {
 
-    var user = sessionStorage.getItem("username");
+    var user = sessionStorage.getItem("usernamet1");
     if (user == null)
         window.location.replace("/index.html");
-    $.get("/api/TempLogin/CanAccess/" + user, function (data) {
+    $.get("/api/NewLogin/CanAccess/" + user, function (data) {
     }).done(function (data) {
         if (data === false) {
             window.location.replace("/index.html");
@@ -18,7 +18,16 @@ function onload() {
         }
     });
 
-    $("#Messages").text("Hello, " + sessionStorage.getItem("username") + "!");
+    var tenant = sessionStorage.getItem("tenant");
+    if (tenant === "both") {
+        $("<li id=\"ToOldUILi\" class=\"nav-item\">").appendTo("#LeftNav");
+        $("<a id=\"ToOldUIA\" class=\"nav-link\" href=\"/home.html\">").appendTo("#ToOldUILi");
+        $("<img id=\"ToOldUIImg\" width=\"30\">").appendTo("#ToOldUIA");
+        $("#ToOldUIImg").attr("src", "/images/Arrow Icon.png");
+        $("<span id=\"ToOldUISpan\">").appendTo("#ToOldUIA");
+        $("#ToOldUISpan").text("Tenant1");
+    }
+    $("#Messages").text("Hello, " + sessionStorage.getItem("usernamet1") + "!");
     $.ajax({
         url: url + "/GetAll",
         type: "GET",
@@ -43,7 +52,8 @@ function onload() {
                 $(`#IndivDiv${key}`).css("justify-content", "center");
                 //$(`#IndivDiv${key}`).css("display", "block");
                 $(`#IndivDiv${key}`).css("padding", "0");
-                $(`#IndivDiv${key}`).css("width", "100%");
+               // $(`#IndivDiv${key}`).css("width", "auto");
+               // $(`#IndivDiv${key}`).css("height", "auto");
                 $(`#IndivDiv${key}`).addClass("col-sm");
                 $(`#IndivDiv${key}`).css("border", "2px dashed red");
                 $(`#IndivDiv${key}`).css("text-align", "center");
@@ -128,7 +138,7 @@ function makeRequests(id) {
     }
     $.ajax({
 
-        url: url + "/PostAddItemToUserCart/" + sessionStorage.getItem("username") + "&" + name + "&" + quantity,
+        url: url + "/PostAddItemToUserCart/" + sessionStorage.getItem("usernamet1") + "&" + name + "&" + quantity,
         type: "POST",
         success: function (data, status, xhr) {
             $(`#MessageBox${id}`).text(data);
@@ -173,7 +183,7 @@ function ShowPasswordChangeModel() {
     $(document.documentElement).animate({
         scrollTop: $("#NavBar").offset().top
     }, 2000);
-    $("#Name").text("Hi, " + sessionStorage.getItem("username") + "!");
+    $("#Name").text("Hi, " + sessionStorage.getItem("usernamet1") + "!");
     $("#PasswordModal").css("display", "block");
     $("#ChangePasswordForm").submit(function SubmissionHandler(event) {
         event.preventDefault();
@@ -190,7 +200,7 @@ function ShowPasswordChangeModel() {
         let oldPassword = $("#OldPassword").val();
 
         $.ajax({
-            url: "/api/TempParent/PostChangePassword/" + sessionStorage.getItem("username") + "&" + oldPassword + "&" + password,
+            url: "/api/NewParent/PostChangePassword/" + sessionStorage.getItem("usernamet1") + "&" + oldPassword + "&" + password,
             method: "Post",
             success: function (data, status, xhr) {
                 if (data === false) {
@@ -212,13 +222,24 @@ function ConfirmAccountDeletion() {
     if (retVal == true) {
         //api call
         alert("Your Account Has Been Successfully Deleted! Your Cart Will Be Emptied and You Will Be Logged Out!");
-        emptyCart();
-        logout();
+        emptyCartT1();
+        logoutT1();
         $.ajax({
-            url: "/api/TempParent/PostRemoveUser/" + sessionStorage.getItem("username") + "&" + "P4s9LnYKCquF4CVU",
+            url: "/api/NewParent/PostRemoveUser/" + sessionStorage.getItem("usernamet1") + "&" + "P4s9LnYKCquF4CVU",
             type: "POST",
             error: function (data) {
                 alert("error");
+            },
+            success: function (data, status, xhr) {
+                emptyCartT2();
+                logoutT2();
+                $.ajax({
+                    url: "/api/Parent/PostRemoveUser/" + sessionStorage.getItem("usernamet1") + "&" + "P4s9LnYKCquF4CVU",
+                    type: "POST",
+                    error: function (data) {
+                        alert("error");
+                    }
+                });
             }
         });
     }
@@ -227,9 +248,9 @@ function ConfirmAccountDeletion() {
     }
 }
 
-function emptyCart() {
+function emptyCartT1() {
     $.ajax({
-        url: url + "/PostEmptyCart/" + sessionStorage.getItem("username"),
+        url: url + "/PostEmptyCart/" + sessionStorage.getItem("usernamet1"),
         method: "POST",
         error: function (data) {
             alert("error");
@@ -240,7 +261,7 @@ function emptyCart() {
 function undo() {
 
     $.ajax({
-        url: url + "/PostUndoDelete/" + sessionStorage.getItem("username"),
+        url: url + "/PostUndoDelete/" + sessionStorage.getItem("usernamet1"),
         method: "POST",
         success: function (data, status, xhr) {
             $(`#ModalMessage`).text(data);
@@ -263,7 +284,7 @@ function buttonHandler() {
 function buttonHandlerRemove() {
 
     $.ajax({
-        url: url + "/PostRemoveItemFromCart/" + sessionStorage.getItem("username") + "&" + $(`table > tbody > tr#${this.id} > td.name${this.id}`).text(),
+        url: url + "/PostRemoveItemFromCart/" + sessionStorage.getItem("usernamet1") + "&" + $(`table > tbody > tr#${this.id} > td.name${this.id}`).text(),
         method: "POST",
         success: function (data, status, xhr) {
             $("#ModalMessage").text(data);
@@ -291,7 +312,7 @@ function showCart(fromUndo) {
     }
     $("#Modal").css("display", "block");
     $(".modal-content > table > tbody > tr").remove();
-    $.get(url + "/GetUserLocalCart/" + sessionStorage.getItem("username"))
+    $.get(url + "/GetUserLocalCart/" + sessionStorage.getItem("usernamet1"))
         .done(function (data) {
             var i = 0;
             var cost = 0;
@@ -334,9 +355,24 @@ $(".close-modal").click(function () {
     $("#ItemModal").css("display", "none");
 });
 
-function logout() {
+function logoutT1() {
 
-    var jqxhr = $.get("/api/TempLogin/LogOut/" + sessionStorage.getItem("username"), function () {
+    var jqxhr = $.get("/api/NewLogin/LogOut/" + sessionStorage.getItem("usernamet1"), function () {
+    }).done(function (data) {
+
+        $("#Messages").text(jqxhr.getResponseHeader("message"));
+        $("#Messages").css("background-color", "pink");
+        $("#Messages").css("font-size", "120%");
+        setTimeout(function () {
+            window.location = jqxhr.getResponseHeader("location");
+        }, 1000);
+        return;
+    });
+}
+
+function logoutT2() {
+
+    var jqxhr = $.get("/api/Login/LogOut/" + sessionStorage.getItem("usernamet2"), function () {
     }).done(function (data) {
 
         $("#Messages").text(jqxhr.getResponseHeader("message"));

@@ -12,15 +12,17 @@
 
     <form id="form" class="container ml-auto mr-auto">
         <h1>Login to Shop at Archie's Store</h1>
-        <img src="images/profile-pic.jpg" class="img-fluid"/>
+        <img src="images/profile-pic.jpg" class="img-fluid" />
         <br />
-        <span id="message"></span>
+        <span id="message1"></span>
+        <br />
+        <span id="message2"></span>
         <br />
         <p>Username:</p>
-        <input id="username" type="text" name="username" required placeholder="username" />
+        <input id="username" type="text" name="username" required autocomplete="username email" placeholder="username" />
         <br />
         <p>Password:</p>
-        <input id="password" type="password" name="password" required placeholder="password" />
+        <input id="password" type="password" name="password" autocomplete="new-password" required placeholder="password" />
         <br />
         <button type="submit">Login</button>
         <br />
@@ -35,11 +37,21 @@
 
             $.ajax({
 
-                url: "/api/TempLogin/CanAccess/" + sessionStorage.getItem("username"),
+                url: "/api/NewLogin/CanAccess/" + sessionStorage.getItem("usernamet1"),
                 type: "GET",
                 success: function (data) {
                     if (data === true)
                         window.location = "/temp.html";
+                }
+            });
+
+            $.ajax({
+
+                url: "/api/Login/CanAccess/" + sessionStorage.getItem("usernamet2"),
+                type: "GET",
+                success: function (data) {
+                    if (data === true)
+                        window.location = "/home.html";
                 }
             });
         }

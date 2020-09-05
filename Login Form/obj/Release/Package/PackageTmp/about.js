@@ -1,6 +1,17 @@
-﻿$("#AboutMessages").text("Hello, " + sessionStorage.getItem("username") + "!");
-$("#ContactMessages").text("Hello, " + sessionStorage.getItem("username") + "!");
+﻿$("#AboutMessages").text("Hello, " + sessionStorage.getItem("usernamet1") + "!");
+$("#ContactMessages").text("Hello, " + sessionStorage.getItem("usernamet1") + "!");
 
+var tenant = sessionStorage.getItem("tenant");
+if (tenant === "both") {
+    $("<li id=\"ToOldUILi\" class=\"nav-item\">").appendTo("#LeftNav");
+    $("<a id=\"ToOldUIA\" class=\"nav-link\" href=\"/home.html\">").appendTo("#ToOldUILi");
+    $("<img id=\"ToOldUIImg\" width=\"30\">").appendTo("#ToOldUIA");
+    $("#ToOldUIImg").attr("src", "/images/Arrow Icon.png");
+    $("<span id=\"ToOldUISpan\">").appendTo("#ToOldUIA");
+    $("#ToOldUISpan").text("Tenant1");
+}
+
+var url = "/api/NewHome";
 function showCart(fromUndo) {
 
     if (!fromUndo) {
@@ -52,6 +63,8 @@ function showCart(fromUndo) {
 
 $(".close-modal").click(function () {
 
+    $("#PasswordModal").css("display", "none");
+    $("#ItemModal").css("display", "none");
     $("#Modal").css("display", "none");
 });
 
@@ -61,9 +74,9 @@ $(".modal").click(function () {
     }
 });
 
-function logout() {
+function logoutT1() {
 
-    var jqxhr = $.get("/api/TempLogin/LogOut/" + sessionStorage.getItem("username"), function () {
+    var jqxhr = $.get("/api/NewLogin/LogOut/" + sessionStorage.getItem("usernamet1"), function () {
     }).done(function (data) {
 
         $("#AboutMessages").text(jqxhr.getResponseHeader("message"));
@@ -85,7 +98,7 @@ function ShowPasswordChangeModel() {
     $(document.documentElement).animate({
         scrollTop: $("#NavBar").offset().top
     }, 2000);
-    $("#Name").text("Hi, " + sessionStorage.getItem("username") + "!");
+    $("#Name").text("Hi, " + sessionStorage.getItem("usernamet1") + "!");
     $("#PasswordModal").css("display", "block");
     $("#ChangePasswordForm").submit(function SubmissionHandler(event) {
         event.preventDefault();
@@ -102,7 +115,7 @@ function ShowPasswordChangeModel() {
         let oldPassword = $("#OldPassword").val();
 
         $.ajax({
-            url: "/api/TempParent/PostChangePassword/" + sessionStorage.getItem("username") + "&" + oldPassword + "&" + password,
+            url: "/api/NewParent/PostChangePassword/" + sessionStorage.getItem("usernamet1") + "&" + oldPassword + "&" + password,
             method: "Post",
             success: function (data, status, xhr) {
                 if (data === false) {
@@ -123,10 +136,10 @@ function ConfirmAccountDeletion() {
     var retVal = confirm("Are You Sure You Want To Delete Your Account? I will hate to see you leave.");
     if (retVal == true) {
         alert("Your Account Has Been Successfully Deleted! Your Cart Will Be Emptied and You Will Be Logged Out!");
-        emptyCart();
-        this.logout();
+        emptyCartT1();
+        logoutT1();
         $.ajax({
-            url: "/api/TempParent/PostRemoveUser/" + sessionStorage.getItem("username") + "&" + "P4s9LnYKCquF4CVU",
+            url: "/api/NewParent/PostRemoveUser/" + sessionStorage.getItem("username") + "&" + "P4s9LnYKCquF4CVU",
             type: "POST",
             error: function (data) {
                 alert("error");
@@ -138,7 +151,7 @@ function ConfirmAccountDeletion() {
     }
 }
 
-function emptyCart() {
+function emptyCartT1() {
     $.ajax({
         url: url + "/PostEmptyCart/" + sessionStorage.getItem("username"),
         method: "POST",

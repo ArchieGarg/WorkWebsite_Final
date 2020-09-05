@@ -3,7 +3,7 @@
     background-color: teal;
 }
 
-#message {
+#message1, #message2 {
     font-size: 48px;
     background-color: yellow;
     color: blue;

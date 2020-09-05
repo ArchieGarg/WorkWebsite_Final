@@ -9,9 +9,11 @@
 </head>
 <body onload="onLoad()">
 
-    <span id="currentUser"></span>    
-    <button id="logout" onclick="LogOut();">LogOut</button>
-
+    <div id="ControlContainer">
+        
+        <span id="currentUser"></span>    
+        <button id="logout" onclick="LogOut();">LogOut</button>
+    </div>
     <h2 id="messages"></h2>
     <h1>
         Your Cart
@@ -73,7 +75,7 @@
             var quant = $("#quantity").val();
             var cost = $("#cost").val();
 
-            $.post(url + "/PostAdd/" + localStorage.getItem("username") + "&" + name + "&" + quant + "&" + cost + "&" + descrip, function (data) {
+            $.post(url + "/PostAdd/" + sessionStorage.getItem("usernamet2") + "&" + name + "&" + quant + "&" + cost + "&" + descrip, function (data) {
                 console.log("add to list success");
             }).done(function done(data) {
                 if (data === false) {
@@ -81,7 +83,7 @@
                     $("#messages").text("You Can Only Add Ten Items");
                     return;
                 }
-                $.getJSON(url + "/GetAll/" + localStorage.getItem("username"))
+                $.getJSON(url + "/GetAll/" + sessionStorage.getItem("usernamet2"))
                     .done(function (data) {
 
                         if (data === true)
@@ -116,17 +118,25 @@
 
         function onLoad() {
 
-            $("#currentUser").text("Hello, " + localStorage.getItem("username") + "!");
+            $("#currentUser").text("Hello, " + sessionStorage.getItem("usernamet2") + "!");
 
-            $.get("/api/Login/CanAccess/" + localStorage.getItem("username"), function (data) {
+            $.get("/api/Login/CanAccess/" + sessionStorage.getItem("usernamet2"), function (data) {
             }).done(function (data) {
                 if (data === false) {
                     window.location.replace("/index.html");
                     return;
                 }
             });
+
+            var tenant = sessionStorage.getItem("tenant");
+            if (tenant === "both") {
+                $("<button id=\"logout\" class=\"ToOldUIB\">").appendTo("#ControlContainer");
+                $(".ToOldUIB").text("Tenant2");
+                $(".ToOldUIB").click(changeTenant);
+            }
+
             $("<tbody>").appendTo($("#table"));
-            $.get(url + "/GetAll/" + localStorage.getItem("username"))
+            $.get(url + "/GetAll/" + sessionStorage.getItem("usernamet2"))
                 .done(function (data) {
                     var i = 0;
                     // On success, 'data' contains a list of products.
@@ -153,8 +163,13 @@
                 });
         }
 
+        function changeTenant() {
+
+            window.location.replace("/temp.html");
+        }
+
         function buttonHandler() {
-            $.get(url + "/GetRemove/" + localStorage.getItem("username") + "&" + `${this.id}`, function () {
+            $.get(url + "/GetRemove/" + sessionStorage.getItem("usernamet2") + "&" + `${this.id}`, function () {
             }).done(function (data) {
 
                 if (data === false) {
@@ -173,7 +188,7 @@
         }
 
         function LogOut() {
-            var jqxhr = $.get("/api/Login/LogOut/" + localStorage.getItem("username"), function () {
+            var jqxhr = $.get("/api/Login/LogOut/" + sessionStorage.getItem("usernamet2"), function () {
             }).done(function (data) {
 
                 $("#messages").text(jqxhr.getResponseHeader("message"));

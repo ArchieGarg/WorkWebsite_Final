@@ -231,15 +231,19 @@ function ConfirmAccountDeletion() {
                 alert("error");
             },
             success: function (data, status, xhr) {
-                emptyCartT2();
-                logoutT2();
-                $.ajax({
-                    url: "/api/Parent/PostRemoveUser/" + sessionStorage.getItem("usernamet1") + "&" + "P4s9LnYKCquF4CVU",
-                    type: "POST",
-                    error: function (data) {
-                        alert("error");
-                    }
-                });
+
+                if (sessionStorage.getItem("tenant") === "both") {
+
+                    emptyCartT2();
+                    logoutT2();
+                    $.ajax({
+                        url: "/api/Parent/PostRemoveUser/" + sessionStorage.getItem("usernamet1") + "&" + "P4s9LnYKCquF4CVU",
+                        type: "POST",
+                        error: function (data) {
+                            alert("error");
+                        }
+                    });
+                }
             }
         });
     }
@@ -303,11 +307,11 @@ function showCart(fromUndo) {
 
     if (!fromUndo) {
         $(document.documentElement).animate({
-            scrollTop: $("#NavBar").offset().top
+            scrollTop: $("#NavBar").offset().top;
         }, 2000);
     } else {
         $(document.documentElement).animate({
-            scrollTop: $("#NavBar").offset().top
+            scrollTop: $("#NavBar").offset().top;
         }, 0);
     }
     $("#Modal").css("display", "block");

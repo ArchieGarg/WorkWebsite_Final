@@ -95,22 +95,11 @@ namespace Login_Form.Controllers
             if (!auth.Equals("P4s9LnYKCquF4CVU"))
                 return;
 
-            Debug.WriteLine("here");
+            Debug.WriteLine("here in parent.PostRemoveUser()");
             Debug.WriteLine(NewLoginController.uniqueID + " user: " + user);
             lock (lockObject)
             {
                 users.Remove(GetUser(user));
-            }
-            Char[] digits = new Char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-            user = user.TrimEnd(digits);
-            using (SqlConnection connection = new SqlConnection("Server=uniontrackinternsql.database.windows.net;Database=ArchieSQL;User Id=uniontrack;Password=Kinsella9011;"))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(null, connection);
-                // Create and prepare an SQL statement.
-                command.CommandText =
-                    "DELETE from Login_Details where Username='" + user + "'";
-                Debug.WriteLine(command.ExecuteNonQuery());
             }
         }
         public static User GetUser(String u)
